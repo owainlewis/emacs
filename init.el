@@ -6,6 +6,8 @@
 (setq auto-save-default nil)
 (setq make-backup-files nil)
 
+(setq ring-bell-function 'ignore)
+
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -13,9 +15,9 @@
 (load "package")
 (package-initialize)
 (add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
+	     '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+	     '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
 (defvar packages '(
   auto-complete
@@ -24,10 +26,12 @@
   go-autocomplete
   go-eldoc
   go-mode
+  go-autocomplete
+  flymake-go
   haskell-mode
   magit
   markdown-mode
-  solarized-theme
+  monokai-theme
   yaml-mode)
   "Default packages")
 
@@ -48,5 +52,18 @@
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)
-
+(auto-complete-mode 1)
 (load-theme 'monokai t)
+
+(add-hook 'before-save-hook 'whitespace-cleanup)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(ac-config-default)
+(require 'auto-complete-config)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(require 'go-autocomplete)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
