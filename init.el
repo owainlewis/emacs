@@ -3,9 +3,6 @@
 (setq user-full-name "Owain Lewis")
 (setq user-mail-address "owain@owainlewis.com")
 
-(tool-bar-mode -1)
-(menu-bar-mode -1)
-
 (setq auto-save-default nil)
 (setq make-backup-files nil)
 
@@ -48,5 +45,8 @@
       (package-install pkg))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(tool-bar-mode -1)
+(menu-bar-mode -1)
 
 (load-theme 'monokai t)
