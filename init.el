@@ -29,6 +29,7 @@
   go-autocomplete
   flymake-go
   haskell-mode
+  intero
   magit
   markdown-mode
   monokai-theme
@@ -52,7 +53,7 @@
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)
-(auto-complete-mode 1)
+
 (load-theme 'monokai t)
 
 (add-hook 'before-save-hook 'whitespace-cleanup)
@@ -67,3 +68,5 @@
 (require 'go-autocomplete)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(add-hook 'haskell-mode-hook 'intero-mode)
