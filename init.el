@@ -23,9 +23,12 @@
   auto-complete
   clojure-mode
   flycheck
+  go-autocomplete
+  go-eldoc
   go-mode
+  go-autocomplete
+  flymake-go
   haskell-mode
-  intero
   magit
   markdown-mode
   monokai-theme
@@ -45,23 +48,26 @@
     (when (not (package-installed-p pkg))
       (package-install pkg))))
 
+;; UI
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)
-
-(global-linum-mode 1)
-(setq linum-format " %d ")
-
 (load-theme 'monokai t)
 
-(add-hook 'before-save-hook 'whitespace-cleanup)
-
+;; Haskell mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+(custom-set-variables
+ '(haskell-stylish-on-save t))
+
+;; Generic hooks and setup
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(add-hook 'before-save-hook 'whitespace-cleanup)
 
 (ac-config-default)
 (require 'auto-complete-config)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(add-hook 'haskell-mode-hook 'intero-mode)
