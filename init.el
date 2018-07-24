@@ -8,6 +8,8 @@
 
 (setq ring-bell-function 'ignore)
 
+(electric-indent-mode -1)
+
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 (when (window-system)
