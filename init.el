@@ -64,4 +64,5 @@
   (add-hook 'haskell-mode-hook 'structured-haskell-mode)
   (add-hook 'haskell-mode-hook 'interactive-haskell-mode))
 
+(custom-set-variables '(haskell-stylish-on-save t))
 (setq haskell-process-type 'stack-ghci)
