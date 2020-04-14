@@ -14,6 +14,7 @@
 
 ;; Some general editor nice to haves
 ;; =======================================
+
 (global-linum-mode t)
 (setq linum-format "%d ")
 
@@ -25,6 +26,7 @@
 
 ;; Package setup
 ;; =======================================
+
 (require 'package)
 
 (setq package-enable-at-startup nil)
@@ -63,4 +65,3 @@
   (add-hook 'haskell-mode-hook 'interactive-haskell-mode))
 
 (setq haskell-process-type 'stack-ghci)
-
