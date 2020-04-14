@@ -1,10 +1,14 @@
 ;; Basics
 ;; =======================================
+
 (setq user-full-name "Owain Lewis")
 (setq user-mail-address "owain@owainlewis.com")
+
 (setq auto-save-default nil)
 (setq make-backup-files nil)
+
 (setq ring-bell-function 'ignore)
+
 ;; Keep custom variables out of this file
 (setq custom-file (concat user-emacs-directory "/custom.el"))
 
@@ -39,6 +43,7 @@
 
 ;; Styles
 ;; =======================================
+
 (set-frame-font "DejaVu Sans Mono 10")
 
 ;; Packages
