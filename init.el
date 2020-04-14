@@ -1,71 +1,61 @@
-(require 'cl)
-
+;; Basics
+;; =======================================
 (setq user-full-name "Owain Lewis")
 (setq user-mail-address "owain@owainlewis.com")
-
 (setq auto-save-default nil)
 (setq make-backup-files nil)
-
 (setq ring-bell-function 'ignore)
+;; Keep custom variables out of this file
+(setq custom-file (concat user-emacs-directory "/custom.el"))
 
-(electric-indent-mode -1)
+;; Some general editor nice to haves
+;; =======================================
+(global-linum-mode t)
+(setq linum-format "%d ")
 
-(defalias 'yes-or-no-p 'y-or-n-p)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(load "package")
-(package-initialize)
-(add-to-list 'package-archives
-	     '("marmalade" . "http://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives
-	     '("melpa" . "http://melpa.milkbox.net/packages/") t)
-
-(defvar packages '(
-  auto-complete
-  clojure-mode
-  flycheck
-  go-autocomplete
-  go-eldoc
-  go-mode
-  go-autocomplete
-  flymake-go
-  haskell-mode
-  intero
-  neotree
-  magit
-  markdown-mode
-  atom-one-dark-theme
-  yaml-mode)
-  "Default packages")
-
-(defun packages-installed-p ()
-  (loop for pkg in packages
-    when (not (package-installed-p pkg))
-      do (return nil)
-      finally (return t)))
-
-(unless (packages-installed-p)
-  (message "%s" "Refreshing package database...")
-  (package-refresh-contents)
-  (dolist (pkg packages)
-    (when (not (package-installed-p pkg))
-      (package-install pkg))))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(tool-bar-mode -1)
 (menu-bar-mode -1)
+(column-number-mode t)
 
-(load-theme 'atom-one-dark t)
+(setq-default indent-tabs-mode nil)
+(setq-default show-trailing-whitespace t)
 
-(add-hook 'before-save-hook 'whitespace-cleanup)
-(add-hook 'before-save-hook #'gofmt-before-save)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Package setup
+;; =======================================
+(require 'package)
 
-(ac-config-default)
-(require 'auto-complete-config)
+(setq package-enable-at-startup nil)
+(setq package-archives
+      '(("gnu"          . "https://elpa.gnu.org/packages/")
+	("melpa"        . "https://melpa.org/packages/")
+	("melpa-stable" . "https://stable.melpa.org/packages/")
+	("org"          . "http://orgmode.org/elpa/")))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(package-initialize)
 
-(require 'go-autocomplete)
+;; Bootstrap `use-package'
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+;; Styles
+;; =======================================
+(set-frame-font "DejaVu Sans Mono 10")
+
+;; Packages
+;; =======================================
+
+(use-package nimbus-theme
+  :init (load-theme 'nimbus t)
+  :ensure t)
+
+(use-package yaml-mode :ensure t)
+(use-package markdown-mode :ensure t)
+
+(use-package haskell-mode
+  :ensure t
+  :init
+  (add-hook 'haskell-mode-hook 'structured-haskell-mode)
+  (add-hook 'haskell-mode-hook 'interactive-haskell-mode))
+
+(setq haskell-process-type 'stack-ghci)
+
