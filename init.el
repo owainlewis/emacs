@@ -36,33 +36,21 @@
   auto-save-default nil
   create-lockfiles nil)
 
-;; Never mix tabs and spaces. Never use tabs, period.
-;; We need the setq-default here because this becomes
-;; a buffer-local variable when set.
 (setq-default indent-tabs-mode nil)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 (set-fill-column 110)
 
-(scroll-bar-mode -1)
-
-
 ;; Keep custom variables out of this file
 (setq custom-file (concat user-emacs-directory "/custom.el"))
 
-;; Some general editor nice to haves
-;; =======================================
-
 (global-linum-mode t)
 (setq linum-format "%d ")
-
 (delete-selection-mode t)
-
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (column-number-mode t)
-
 (setq-default indent-tabs-mode nil)
 (setq-default show-trailing-whitespace t)
 (add-hook 'before-save-hook #'delete-trailing-whitespace)
@@ -70,7 +58,6 @@
 
 ;; Package setup
 ;; =======================================
-
 (require 'package)
 
 (setq package-enable-at-startup nil)
@@ -90,10 +77,6 @@
 ;; Styles
 ;; =======================================
 
-(set-frame-font "DejaVu Sans Mono 12")
-
-;; Init file updates
-;; ======================================
 (defun open-init-file ()
   "Open this very file."
   (interactive)
@@ -105,13 +88,18 @@
 ;; =======================================
 
 (use-package doom-themes
-  :init (load-theme 'doom-challenger-deep t)
+  :ensure t
+  :init (load-theme 'doom-one t)
   :config
     (doom-themes-visual-bell-config)
     (doom-themes-org-config)
     (setq doom-challenger-deep-brighter-comments t
           doom-challenger-deep-brighter-modeline t)
-  :ensure t)
+    :ensure t)
+
+(use-package fira-code-mode
+  :ensure t
+  :config (global-fira-code-mode))
 
 (use-package yaml-mode :ensure t)
 
@@ -125,15 +113,8 @@
 (custom-set-variables '(haskell-stylish-on-save t))
 (setq haskell-process-type 'stack-ghci)
 
-(use-package magit
-
-  :bind (("C-c g" . #'magit-status))
-  :config
-  (add-to-list 'magit-no-confirm 'stage-all-changes))
-
 (use-package projectile
   :ensure t
-  :custom (projectile-completion-system 'ivy)
   :config (projectile-mode 1))
 
 (use-package helm
