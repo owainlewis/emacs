@@ -104,10 +104,6 @@
 ;; Packages
 ;; =======================================
 
-;; (use-package nimbus-theme
-;;   :init (load-theme 'nimbus t)
-;;   :ensure t)
-
 (use-package doom-themes
   :init (load-theme 'doom-challenger-deep t)
   :config
@@ -116,12 +112,6 @@
     (setq doom-challenger-deep-brighter-comments t
           doom-challenger-deep-brighter-modeline t)
   :ensure t)
-
-(use-package dashboard
-  :ensure t
-  :custom
-  (dashboard-banner-logo-title "Welcome back.")
-  :config (dashboard-setup-startup-hook))
 
 (use-package yaml-mode :ensure t)
 
@@ -136,35 +126,18 @@
 (setq haskell-process-type 'stack-ghci)
 
 (use-package magit
-  :diminish magit-auto-revert-mode
-  :diminish auto-revert-mode
+
   :bind (("C-c g" . #'magit-status))
   :config
   (add-to-list 'magit-no-confirm 'stage-all-changes))
 
 (use-package projectile
   :ensure t
-  :diminish
-  :bind (("C-c k" . #'projectile-kill-buffers)
-	   ("C-c M" . #'projectile-compile-project))
   :custom (projectile-completion-system 'ivy)
-  :config (projectile-mode))
+  :config (projectile-mode 1))
 
 (use-package helm
   :ensure t
-  :bind (("M-a" . helm-M-x)
-         ("C-x C-f" . helm-find-files)
-         ("C-x f" . helm-recentf)
-         ("C-SPC" . helm-dabbrev)
-         ("M-y" . helm-show-kill-ring)
-         ("C-x b" . helm-buffers-list))
-  :bind (:map helm-map
-	      ("M-i" . helm-previous-line)
-	      ("M-k" . helm-next-line)
-	      ("M-I" . helm-previous-page)
-	      ("M-K" . helm-next-page)
-	      ("M-h" . helm-beginning-of-buffer)
-	      ("M-H" . helm-end-of-buffer))
   :config (progn
-	    (setq helm-buffers-fuzzy-matching t)
+            (setq helm-buffers-fuzzy-matching t)
             (helm-mode 1)))
