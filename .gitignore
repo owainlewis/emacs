@@ -1,10 +1,5 @@
-auto-save-list
-elpa
-var
-eshell
-ac-*
-eshell
-ac-*
-network-security.data
-custom.el
-opan-user-setup.el
+# Ignore everything
+*
+
+# But not these files...
+!.init.el
