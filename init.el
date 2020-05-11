@@ -97,10 +97,6 @@
           doom-challenger-deep-brighter-modeline t)
     :ensure t)
 
-(use-package fira-code-mode
-  :ensure t
-  :config (global-fira-code-mode))
-
 (use-package yaml-mode :ensure t)
 
 (use-package markdown-mode :ensure t)
