@@ -1,5 +1,6 @@
-;; Basics
+;; Defaults
 ;; =======================================
+
 (setq
    ;; My name
    user-full-name "Owain Lewis"
@@ -21,15 +22,11 @@
    kill-whole-line t
    ;; search should be case-sensitive by default
    case-fold-search nil
+   ;; Add some buffering to line numbers
+   linum-format "%d "
+   ;; Require newlines at end of files
+   require-final-newline t
    )
-
-(set-charset-priority 'unicode)
-(setq locale-coding-system 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-(set-selection-coding-system 'utf-8)
-(prefer-coding-system 'utf-8)
-(setq default-process-coding-system '(utf-8-unix . utf-8-unix))
 
 (setq
   make-backup-files nil
@@ -46,20 +43,21 @@
 (setq custom-file (concat user-emacs-directory "/custom.el"))
 
 (global-linum-mode t)
-(setq linum-format "%d ")
+
+;; Disable clutter in GUI
 (delete-selection-mode t)
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (column-number-mode t)
+
 (setq-default indent-tabs-mode nil)
 (setq-default show-trailing-whitespace t)
+
 (add-hook 'before-save-hook #'delete-trailing-whitespace)
-(setq require-final-newline t)
 
 ;; Package setup
 ;; =======================================
 (require 'package)
-
 (setq package-enable-at-startup nil)
 (setq package-archives
       '(("gnu"          . "https://elpa.gnu.org/packages/")
@@ -69,20 +67,9 @@
 
 (package-initialize)
 
-;; Bootstrap `use-package'
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
-
-;; Styles
-;; =======================================
-
-(defun open-init-file ()
-  "Open this very file."
-  (interactive)
-  (find-file "~/.emacs.id/init.el"))
-
-(bind-key "C-c e" #'open-init-file)
 
 ;; Packages
 ;; =======================================
@@ -97,17 +84,24 @@
           doom-challenger-deep-brighter-modeline t)
     :ensure t)
 
-(use-package yaml-mode :ensure t)
+(use-package yaml-mode
+  :ensure t)
 
-(use-package markdown-mode :ensure t)
+(use-package markdown-mode
+  :ensure t)
+
+(use-package format-all
+  :ensure t)
 
 (use-package haskell-mode
   :ensure t
   :init
   (add-hook 'haskell-mode-hook 'structured-haskell-mode)
   (add-hook 'haskell-mode-hook 'interactive-haskell-mode))
-(custom-set-variables '(haskell-stylish-on-save t))
+
 (setq haskell-process-type 'stack-ghci)
+(setq haskell-stylish-on-save t)
+(setq haskell-mode-stylish-haskell-path "brittany")
 
 (use-package projectile
   :ensure t
