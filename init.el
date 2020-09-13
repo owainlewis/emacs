@@ -76,7 +76,7 @@
 
 (use-package doom-themes
   :ensure t
-  :init (load-theme 'doom-one t)
+  :init (load-theme 'doom-dark+ t)
   :config
     (doom-themes-visual-bell-config)
     (doom-themes-org-config)
@@ -91,6 +91,9 @@
   :ensure t)
 
 (use-package format-all
+  :ensure t)
+
+(use-package tuareg
   :ensure t)
 
 (use-package haskell-mode
