@@ -51,7 +51,7 @@
 (column-number-mode t)
 
 (setq-default indent-tabs-mode nil)
-(setq-default show-trailing-whitespace t)
+;; (setq-default show-trailing-whitespace t)
 
 (add-hook 'before-save-hook #'delete-trailing-whitespace)
 
@@ -96,6 +96,12 @@
 (use-package tuareg
   :ensure t)
 
+(use-package clojure-mode
+  :ensure t)
+
+(use-package cider
+  :ensure t)
+
 (use-package haskell-mode
   :ensure t
   :init
@@ -115,3 +121,11 @@
   :config (progn
             (setq helm-buffers-fuzzy-matching t)
             (helm-mode 1)))
+
+(use-package dashboard
+    :ensure t
+    :diminish dashboard-mode
+    :config
+    (setq dashboard-items '((recents  . 10)
+                            (bookmarks . 10)))
+    (dashboard-setup-startup-hook))
