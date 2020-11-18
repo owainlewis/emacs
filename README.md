@@ -9,5 +9,5 @@ After getting frustrated with complexity and slow startup (spacemacs) this aims 
 ## Quickstart
 
 ```
-git clone https://github.com/owainlewis/owainlewis-emacs.git ~/.emacs.d
+rm -rf ~/.emacs.d && git clone https://github.com/owainlewis/owainlewis-emacs.git ~/.emacs.d
 ```
