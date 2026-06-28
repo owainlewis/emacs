@@ -1,5 +1,11 @@
-# Ignore everything
-*
-
-# But not these files...
-!.init.el
+auto-save-list/
+elpa/
+eln-cache/
+etc/
+transient/
+var/
+custom.el
+*.elc
+*~
+\#*\#
+.\#*

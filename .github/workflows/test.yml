@@ -1,0 +1,22 @@
+name: test
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+
+jobs:
+  emacs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Emacs
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y emacs-nox
+      - name: Load config
+        run: emacs --batch -Q --load tests/check-init.el
+      - name: Install packages
+        run: OWAIN_EMACS_INSTALL_PACKAGES=1 emacs --batch -Q --load init.el --eval "(message \"Full config loaded\")"
+      - name: Byte compile
+        run: emacs --batch -Q --load init.el --eval "(byte-compile-file \"init.el\")"
